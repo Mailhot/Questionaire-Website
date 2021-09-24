@@ -1,5 +1,5 @@
 from app import app, db
-from models import User, Question, QuestionChoice, UserAnswer
+from app.models import User, Question, QuestionChoice, UserAnswer
 
 
 @app.shell_context_processor
