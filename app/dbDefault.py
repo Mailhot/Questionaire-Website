@@ -1,7 +1,7 @@
 
 def init_db(db):
 	# drops DB models, to reset the db
-	db.drop_all()
+	# db.drop_all()
 
 	#Delete all rows from all tables
 	db.session.commit()
