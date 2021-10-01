@@ -9,7 +9,8 @@ from flask_migrate import Migrate
 from flask_admin import Admin
 from flask_admin.contrib.sqla import ModelView
 
-
+# reset DB
+db.drop_all()
 
 class User(UserMixin, db.Model):
 	__tablename__ = "user"
@@ -237,8 +238,7 @@ def load_user(id):
 # To be run once on initial start to init the DB with default value,
 # comment after first run.
 
-# # reset DB
-# db.drop_all()
+
 #Delete all rows from all tables
 db.session.commit()
 db.session.query(User).delete()
