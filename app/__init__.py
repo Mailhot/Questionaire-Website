@@ -12,13 +12,13 @@ app = Flask(__name__)
 app.config.from_object(Config)
 app.static_folder = 'static'
 db = SQLAlchemy(app)
-from app.models import models as models_init
-models_init.db_init()
 migrate = Migrate(app, db)
 login = LoginManager(app)
 login.login_view = "login"
 admin = Admin(app)
 
+from app.models import models as models_init
+models_init.db_init()
 from app import routes, models
 
 
