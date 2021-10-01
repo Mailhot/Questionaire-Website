@@ -230,8 +230,9 @@ db.create_all()
 def load_user(id):
 	return User.query.get(int(id))
 
-
-
+# To be run once on initial start to init the DB with default value,
+# comment after first run.
+db.drop_all()
 db.session.add(User(username="admin", email="admin@admin.admin", admin=True, password_hash=generate_password_hash("admin")))
 db.session.add(User(username="user", email="user@user.user", admin=False, password_hash=generate_password_hash("user")))
 
