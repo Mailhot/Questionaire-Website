@@ -245,9 +245,11 @@ user1 = User(username="user", email="user@user.user", admin=False, password_hash
 db.session.add(user1)
 db.session.commit()
 
-db.session.add(Quiz(quizname="Flag Quiz",creator_id=admin1.id,style=1))
 
-db.session.add(QuizStyle(style_name="Old flag style",template_file="quizStyle1.html"))
+quizstyle1 = QuizStyle(style_name="Old flag style",template_file="quizStyle1.html")
+db.session.add(quizstyle1)
+db.session.commit()
+db.session.add(Quiz(quizname="Flag Quiz",creator_id=admin1.id,style=quizstyle1.id))
 
 db.session.add(QuizContent(quiz_id=1,text_content="Are you truly aware of the outside world? Do you have what it takes to test your knowledge on the flags of the world? Take our test !", img_content="au.svg"))
 
@@ -324,11 +326,17 @@ db.session.add(QuestionChoice(question_id=10,choice_number=2,choice_content="Ind
 db.session.add(QuestionChoice(question_id=10,choice_number=3,choice_content="Angola",choice_correct=False))
 db.session.add(QuestionChoice(question_id=10,choice_number=4,choice_content="Jersey",choice_correct=True))
 
-db.session.add(Quiz(quizname="Language Quiz",creator_id=admin1.id,style=2))
+quizstyle2 = QuizStyle(style_name="Language quiz style", template_file="quizStyle2.html")
+db.session.add(quizstyle2)
+db.session.commit()
 
-db.session.add(QuizStyle(style_name="Language quiz style",template_file="quizStyle2.html"))
+quiz2 = Quiz(quizname="Language Quiz", creator_id=admin1.id, style=quizstyle2.id)
+db.session.add(quiz2)
+db.session.commit()
 
-db.session.add(QuizContent(quiz_id=2,text_content="How much do you know about world culture, information and languages?",img_content="people-banner.png"))
+
+db.session.add(QuizContent(quiz_id=quiz2.id,text_content="How much do you know about world culture, information and languages?",img_content="people-banner.png"))
+db.session.commit()
 
 db.session.add(Question(quiz_id=2,question_number=1))
 db.session.add(Question(quiz_id=2,question_number=2))
