@@ -237,8 +237,18 @@ def db_init():
 	# To be run once on initial start to init the DB with default value,
 	# comment after first run.
 
-	# reset DB
-	db.drop_all()
+	# # reset DB
+	# db.drop_all()
+	#Delete all rows from all tables
+	db.session.commit()
+	db.session.query(User).delete()
+	db.session.query(Quiz).delete()
+	db.session.query(QuizStyle).delete()
+	db.session.query(Question).delete()
+	db.session.query(QuestionChoice).delete()
+	db.session.query(QuestionContent).delete()
+	db.session.query(UserAnswer).delete()
+	db.session.commit()
 
 	admin1 = User(username="admin", email="admin@admin.admin", admin=True, password_hash=generate_password_hash("admin"))
 	db.session.add(admin1)
