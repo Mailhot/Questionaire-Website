@@ -241,12 +241,13 @@ def load_user(id):
 
 #Delete all rows from all tables
 db.session.commit()
-db.session.query(User).delete()
+db.session.query(QuestionContent).delete()
+db.session.query(QuestionChoice).delete()
+db.session.query(Question).delete()
 db.session.query(Quiz).delete()
 db.session.query(QuizStyle).delete()
-db.session.query(Question).delete()
-db.session.query(QuestionChoice).delete()
-db.session.query(QuestionContent).delete()
+db.session.query(User).delete()
+
 db.session.query(UserAnswer).delete()
 db.session.commit()
 
