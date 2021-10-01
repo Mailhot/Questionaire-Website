@@ -423,4 +423,4 @@ def db_init():
 	db.session.add(QuestionChoice(question_id=20,choice_number=4,choice_content="Thai",choice_correct=False))
 	db.session.commit()
 
-db_init(db)
+db_init()
