@@ -240,8 +240,10 @@ def load_user(id):
 
 admin1 = User(username="admin", email="admin@admin.admin", admin=True, password_hash=generate_password_hash("admin"))
 db.session.add(admin1)
+db.session.commit()
 user1 = User(username="user", email="user@user.user", admin=False, password_hash=generate_password_hash("user"))
 db.session.add(user1)
+db.session.commit()
 
 db.session.add(Quiz(quizname="Flag Quiz",creator_id=admin1.id,style=1))
 
