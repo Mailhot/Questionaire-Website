@@ -101,7 +101,7 @@ class QuizContent(db.Model):
 	__tablename__ = 'quizContent'
 	id = db.Column(db.Integer,primary_key=True)
 	quiz_id = db.Column(db.Integer, ForeignKey('quiz.id'))
-	text_content = db.Column(db.String(128))
+	text_content = db.Column(db.String(350))
 	img_content = db.Column(db.String(80))
 	
 	def __repr__(self):
@@ -245,7 +245,7 @@ db.session.add(Quiz(quizname="Flag Quiz",creator_id=1,style=1))
 
 db.session.add(QuizStyle(style_name="Old flag style",template_file="quizStyle1.html"))
 
-db.session.add(QuizContent(quiz_id=1,text_content="Are you truly aware of the outside world? Do you have what it takes to test your knowledge on the flags of the world? Take our test !",img_content="au.svg"))
+db.session.add(QuizContent(quiz_id=1,text_content="Are you truly aware of the outside world? Do you have what it takes to test your knowledge on the flags of the world? Take our test !", img_content="au.svg"))
 
 db.session.add(Question(quiz_id=1,question_number=1))
 db.session.add(Question(quiz_id=1,question_number=2))
