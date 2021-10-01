@@ -238,10 +238,12 @@ def load_user(id):
 # To be run once on initial start to init the DB with default value,
 # comment after first run.
 
-db.session.add(User(username="admin", email="admin@admin.admin", admin=True, password_hash=generate_password_hash("admin")))
-db.session.add(User(username="user", email="user@user.user", admin=False, password_hash=generate_password_hash("user")))
+admin1 = User(username="admin", email="admin@admin.admin", admin=True, password_hash=generate_password_hash("admin"))
+db.session.add(admin1)
+user1 = User(username="user", email="user@user.user", admin=False, password_hash=generate_password_hash("user"))
+db.session.add(user1)
 
-db.session.add(Quiz(quizname="Flag Quiz",creator_id=1,style=1))
+db.session.add(Quiz(quizname="Flag Quiz",creator_id=admin1.id,style=1))
 
 db.session.add(QuizStyle(style_name="Old flag style",template_file="quizStyle1.html"))
 
@@ -320,7 +322,7 @@ db.session.add(QuestionChoice(question_id=10,choice_number=2,choice_content="Ind
 db.session.add(QuestionChoice(question_id=10,choice_number=3,choice_content="Angola",choice_correct=False))
 db.session.add(QuestionChoice(question_id=10,choice_number=4,choice_content="Jersey",choice_correct=True))
 
-db.session.add(Quiz(quizname="Language Quiz",creator_id=1,style=2))
+db.session.add(Quiz(quizname="Language Quiz",creator_id=admin1.id,style=2))
 
 db.session.add(QuizStyle(style_name="Language quiz style",template_file="quizStyle2.html"))
 
