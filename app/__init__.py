@@ -17,11 +17,9 @@ login = LoginManager(app)
 login.login_view = "login"
 admin = Admin(app)
 
-from app.models import models as models_init
-models_init.db_init()
 from app import routes, models
 
 
 if __name__ == '__main__':
-	app.run() # for debug mode, Modify to app.run(debug=True).
+	app.run(debug=True) # for debug mode, Modify to app.run(debug=True).
 	
