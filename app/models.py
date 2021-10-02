@@ -522,6 +522,6 @@ def load_user(id):
 
 
 #Question choices for flag quiz
-d
+
 
 # db_init()
