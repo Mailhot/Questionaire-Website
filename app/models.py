@@ -136,7 +136,7 @@ class Quiz(db.Model):
 def create_quiz(*args, **kwargs):
     # Get admin as user
     try:
-        admin1 = session.query(User).filter(name='admin').one()  # filter on name
+        admin1 = db.session.query(User).filter(name='admin').one()  # filter on name
     except MultipleResultsFound, e:
         print e
         # Deal with it
@@ -146,7 +146,7 @@ def create_quiz(*args, **kwargs):
 
     # get quiz style
     try:
-        quizstyle1 = session.query(QuizStyle).filter(style_name='Old flag style').one()  # filter on name
+        quizstyle1 = db.session.query(QuizStyle).filter(style_name='Old flag style').one()  # filter on name
     except MultipleResultsFound, e:
         print e
         # Deal with it
@@ -155,7 +155,7 @@ def create_quiz(*args, **kwargs):
         # Deal with that as well
 
     try:
-        quizstyle2 = session.query(QuizStyle).filter(style_name='Language quiz style').one()  # filter on name
+        quizstyle2 = db.session.query(QuizStyle).filter(style_name='Language quiz style').one()  # filter on name
     except MultipleResultsFound, e:
         print e
         # Deal with it
@@ -186,7 +186,7 @@ class QuizContent(db.Model):
 def create_quizcontent(*args, **kwargs):
     # get te quiz
     try:
-        quiz1 = session.query(Quiz).filter(quizname='Flag Quiz').one()  # filter on name
+        quiz1 = db.session.query(Quiz).filter(quizname='Flag Quiz').one()  # filter on name
     except MultipleResultsFound, e:
         print e
         # Deal with it
@@ -196,7 +196,7 @@ def create_quizcontent(*args, **kwargs):
     db.session.add(QuizContent(quiz_id=qiz1.id,text_content="Are you truly aware of the outside world? Do you have what it takes to test your knowledge on the flags of the world? Take our test !", img_content="au.svg"))
 
     try:
-        quiz2 = session.query(Quiz).filter(quizname='Language Quiz').one()  # filter on name
+        quiz2 = db.session.query(Quiz).filter(quizname='Language Quiz').one()  # filter on name
     except MultipleResultsFound, e:
         print e
         # Deal with it
@@ -235,7 +235,7 @@ class Question(db.Model):
 @event.listens_for(Question.__table__, 'after_create')
 def create_question(*args, **kwargs):
     try:
-        quiz1 = session.query(Quiz).filter(quizname='Flag Quiz').one()  # filter on name
+        quiz1 = db.session.query(Quiz).filter(quizname='Flag Quiz').one()  # filter on name
     except MultipleResultsFound, e:
         print e
         # Deal with it
@@ -244,7 +244,7 @@ def create_question(*args, **kwargs):
         # Deal with that as well
 
     try:
-        quiz2 = session.query(Quiz).filter(quizname='Language Quiz').one()  # filter on name
+        quiz2 = db.session.query(Quiz).filter(quizname='Language Quiz').one()  # filter on name
     except MultipleResultsFound, e:
         print e
         # Deal with it
