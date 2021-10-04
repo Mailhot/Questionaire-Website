@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block head %}
+	{{ super() }}
+	<title>Blog Post</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static',    filename='css/main.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static',    filename='css/quizStyle1.css') }}">
+{% endblock %}
+
+{% block body %}
+	<div class="center">
+		<header id="header">
+			<div class="question">
+				<div>Question</div>
+				<div>
+					<div class="qCircle">
+						<span id="ajaxInput">{{question.question_number}}</span>
+					</div>
+				</div>
+				<div><strong>{{quiz.quizname}}</strong> by {{quiz.creator.username}}</div>
+			</div>
+			<nav id="quiznav">
+				<ul>
+					<li><a href="{{ url_for('home') }}">Home</a></li>
+				</ul>
+			</nav>
+		</header>
+
+		<a href="#menu" class="navPanelToggle"><span class="fa fa-bars"></span></a>
+
+		<!-- Main -->
+		<section id="quiz" class="wrapper">
+			
+			<div class="container">
+				<header>
+					<h3>{{question.question_contents.first().text_content}}</h3>
+				</header>
+				<div class="box alt">
+					<div class="row 50% uniform">
+						<div class="svgContainer"><img id="flag" src="{{ url_for('static',    filename='images/'+question.question_contents.first().img_content) }}" alt=""/></div>
+					</div>
+				</div>
+				<form action="{{ url_for('quiz', quiz_name=quiz.short()) }}" method="post" class="answer" name="form">
+					{{ form.hidden_tag() }}
+					{% for subfield in form.radioField %}
+						<tr>
+							<td>{{ subfield }}</td>
+							<td>{{ subfield.label }}</td>
+						</tr>
+					{% endfor %}
+
+					<div class="button">
+						{{form.submit()}}
+					</div>
+				</form>
+			</div>
+		</section>
+	</div>
+{% endblock %}

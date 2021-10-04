@@ -69,8 +69,38 @@ def about():
 	return None
 
 @app.route('/quizSelect')
+@login_required	
 def quizSelect():
 	return render_template('quizSelect.html', quizzes = Quiz.query.all())
+
+@app.route('/blog/<string:blog_name>', methods=['GET', 'POST'])
+@login_required
+def blog(quiz_name):
+	print(quiz_name)
+	blog = None
+	for a_blog in Blog.query.all():
+		if blog_name == a_blog.short():
+			blog = a_blog
+	if not blog: return quizSelect()
+	quizStyle = blog.quizStyle
+
+
+	#If there is a cookie telling us what question the user is up to
+	if session.get('question_id') != None:
+		question_id = session.get('question_id', None)
+		question = quiz.questions.filter_by(id=question_id).first()
+		form = make_form(quizStyle, question)
+		submitted_form = request.form
+
+		
+		#if no form submitted or no choice made
+		return render_template(quizStyle.template_file,quiz = quiz,question = question,form = form)
+	#If starting from the beginning, no cookie
+	question=quiz.get_question_by_question_number(question_number = 1)
+	session['question_id'] = question.id
+	form = make_form(quizStyle, question)
+	return render_template(quizStyle.template_file,quiz = quiz,question = question,form = form)
+
 
 @app.route('/quiz/<string:quiz_name>', methods=['GET', 'POST'])
 @login_required

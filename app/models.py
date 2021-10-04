@@ -84,6 +84,31 @@ def create_quizstyle(*args, **kwargs):
     db.session.add(quizstyle2)
     db.session.commit()
 
+class Blog(db.Model):
+    __tablename__ = 'blog'
+    id = db.Column(db.Integer,primary_key=True)
+    blogname = db.Column(db.String(80), index=True)
+
+    creator_id = db.Column(db.Integer, ForeignKey('user.id'))
+    creator = relationship('User', back_populates="quizzes")
+
+    style = db.Column(db.Integer, ForeignKey('quizStyle.id'))
+    quizStyle = relationship('QuizStyle', back_populates="quizzes")
+    content = db.Coumn(db.text)
+
+    def short(self):
+        return self.blogname.split(' ', 1)[0].lower()
+
+    def __repr__(self):
+        return self.blogname
+
+    def as_str(self):
+        return '<id:{}'.format(self.id) +'<blog name:{}'.format(self.quizname) 
+
+@event.listens_for(Blog.__table__, 'after_create')
+def create_blog(*args, **kwargs):
+    db.session.add(Blog(blogname="First Blog Post", content=content, creator_id=admin1.id, style=quizstyle1.id))
+    db.session.commit()
 
 
 class Quiz(db.Model):
